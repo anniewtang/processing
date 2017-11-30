@@ -48,12 +48,7 @@ public class Anagrams {
 			StringBuilder output = new StringBuilder();
 			for (String s : anagrams) {
 				output.append(s);
-				if (count != size) {
-					output.append(" ");
-				}
-				// } else {
-				// 	output.append("\n");
-				// }
+				output.append(" ");
 			}
 			System.out.println(output.toString());
 		} else {
@@ -89,10 +84,12 @@ public class Anagrams {
 		}
 
 		// read in input from command line & process outputs
-		Scanner scan = new Scanner(System.in); 
+		Scanner scan = new Scanner(System.in);
+		System.out.print("> "); 
 		String input = scan.nextLine();
 		while (!(input.equals(""))) {
 			displayAnagrams(input);
+			System.out.print("> "); 
 			input = scan.nextLine();
 		}
 	}
