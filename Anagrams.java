@@ -5,7 +5,7 @@ public class Anagrams {
 	/* HashMap has the following mapping:
 	KEY: Sorted word (universal key for all anagrams) 
 	VALUE: TreeSet for all dictionary words that are anagrams */
-	private HashMap<String, TreeSet<String>> map = new HashMap<>();
+	private static HashMap<String, TreeSet<String>> map = new HashMap<>();
 
 	/* private method to process provided dictionary file & update map 
 	PARAMS: arraylist<string> of read in words from txt file
@@ -18,12 +18,15 @@ public class Anagrams {
 			String anagramKey = sortString(originalWord);
 
 			// adds the original word into hashmap's treeset, under anagramKey
-			if (map.contains(anagramKey)) {
-				TreeSet<String> wordsList = map.get(anagramKey);
+			TreeSet<String> wordsList;
+			if (!map.containsKey(anagramKey)) {
+				wordsList = new TreeSet<>();
+				wordsList.add(originalWord);
+				map.put(anagramKey, wordsList);
 			} else {
-				TreeSet<String> wordsList = new TreeSet<>();
+				wordsList = map.get(anagramKey);
+				wordsList.add(originalWord);
 			}
-			wordsList.add(originalWord);
 		}
 	}
 
@@ -39,22 +42,30 @@ public class Anagrams {
 	private static void displayAnagrams(String w) {
 		String anagramKey = sortString(w);
 		TreeSet<String> anagrams = map.get(anagramKey);
-		if (anagrams) {
+		if (anagrams != null) {
 			int count = 0;
 			int size = anagrams.size() - 1;
 			StringBuilder output = new StringBuilder();
-			for (String s : anagrams.iterator()) {
+			for (String s : anagrams) {
 				output.append(s);
 				if (count != size) {
 					output.append(" ");
-				} else {
-					output.append("\n");
 				}
+				// } else {
+				// 	output.append("\n");
+				// }
 			}
 			System.out.println(output.toString());
 		} else {
 			System.out.println('-');
 		}
+	}
+
+	private static void testDictionary(ArrayList<String> original) {
+		// for (Map.Entry e : map.entrySet()) {
+		// 	System.out.println(e.getKey());
+		// 	System.out.println(e.getValue());
+		// }
 	}
 
 	public static void main(String[] args) {
@@ -70,12 +81,12 @@ public class Anagrams {
 				original.add(word);
 			}
 			fileReader.close();
+			// process dictionary and update HashMap map
+			processDictionary(original);
+			// testDictionary(original);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
-		// process dictionary and update HashMap map
-		processDictionary(original);
 
 		// read in input from command line & process outputs
 		Scanner scan = new Scanner(System.in); 
@@ -85,4 +96,4 @@ public class Anagrams {
 			input = scan.nextLine();
 		}
 	}
-}
+} 
