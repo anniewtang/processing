@@ -39,6 +39,9 @@ public class Anagrams {
 		return new String(temp);
 	}
 
+	/* private method to create final output String of anagrams
+	PARAMS: String (original word from dictionary)
+	RETURN: (void) */
 	private static void displayAnagrams(String w) {
 		String anagramKey = sortString(w);
 		TreeSet<String> anagrams = map.get(anagramKey);
