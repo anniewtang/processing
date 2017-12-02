@@ -1,4 +1,5 @@
 # processing
+link to my program design/outline document: <a href="https://docs.google.com/document/d/1p4K6J5VvoheUuhHOU6nVtX5rk6OX6O18DDHtqzIurMs/edit?usp=sharing">here</a>, via google docs
 ## QUESTION 1: Running time of program
 Let N represent the number of words in the dictionary, and W be the length of the longest word.
 <br>
